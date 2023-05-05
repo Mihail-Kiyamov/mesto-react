@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <body className="page">
+      <div className="page">
         <div className="page__container">
           <Header></Header>
           <Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onCardClick={handleCardClick}></Main>
@@ -69,7 +69,7 @@ function App() {
             name="avatarSrc" placeholder="Ссылка на картинку" required />
           <span className="popup__input-error avatar-src-input-error"></span>
         </label></>}></PopupWithForm>
-      </body>
+      </div>
 
     </div>
   );

@@ -3,9 +3,9 @@ import api from '../utils/api';
 import Card from './Card';
 
 function Main(props) {
-    const [userName, setUserName] = useState();
-    const [userDescription, setUserDescription] = useState();
-    const [userAvatar, setUserAvatar] = useState();
+    const [userName, setUserName] = useState('');
+    const [userDescription, setUserDescription] = useState('');
+    const [userAvatar, setUserAvatar] = useState('');
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
@@ -44,7 +44,7 @@ function Main(props) {
                 <button className="profile__add-button" type="button" onClick={props.onAddPlace}></button>
             </section>
             <section className="elements">
-                {cards.map((cardObj) => (<Card card={cardObj} onCardClick={props.onCardClick}></Card>))}
+                {cards.map((cardObj) => (<Card key={cardObj._id} card={cardObj} onCardClick={props.onCardClick}></Card>))}
             </section>
         </main>
     );
