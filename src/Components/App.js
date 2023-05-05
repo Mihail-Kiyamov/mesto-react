@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
-import PopupWithImage from './ImagePopup';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -62,7 +62,7 @@ function App() {
               name="mestoSrc" placeholder="Ссылка на картинку" required />
             <span className="popup__input-error mesto-src-input-error"></span>
           </label> </>}></PopupWithForm>
-        <PopupWithImage card={selectedCard} onClose={closeAllPopups}></PopupWithImage>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
         <PopupWithForm name='warning' title='Вы уверены?' isOpen={false} onClose={closeAllPopups}></PopupWithForm>
         <PopupWithForm name='change-avatar' title='Обновить аватар' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} children={<><label className="popup__form-field">
           <input className="popup__input popup__input_type_avatar-src" type="url" id="avatar-src-input"
