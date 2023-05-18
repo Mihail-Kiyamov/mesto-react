@@ -20,10 +20,12 @@ function AddPlacePopup(props) {
             mestoName: mestoName,
             mestoSrc: mestoSrc
         });
+    }
 
+    useEffect(() => {
         setMestoName('');
         setMestoSrc('');
-    }
+    }, [props.isOpen])
 
     return (
         <PopupWithForm

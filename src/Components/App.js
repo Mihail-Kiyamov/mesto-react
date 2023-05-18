@@ -25,10 +25,8 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
-  }, []);
+      });
 
-  useEffect(() => {
     api.getInitialCards()
       .then((data) => {
         setCards(data);
@@ -64,9 +62,13 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-    });
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardDelete(card) {
@@ -114,47 +116,45 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
-        <div className="page">
-          <div className="page__container">
-            <Header></Header>
-            <Main
-              cards={cards}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}>
-            </Main>
-            <Footer></Footer>
-          </div>
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}>
-          </EditProfilePopup>
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onSaveCard={handleSaveCard}>
-          </AddPlacePopup>
-          <ImagePopup
-            card={selectedCard}
-            onClose={closeAllPopups}>
-          </ImagePopup>
-          <PopupWithForm
-            name='warning'
-            title='Вы уверены?'
-            isOpen={false}
-            onClose={closeAllPopups}>
-          </PopupWithForm>
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}>
-          </EditAvatarPopup>
+      <div className="page">
+        <div className="page__container">
+          <Header></Header>
+          <Main
+            cards={cards}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}>
+          </Main>
+          <Footer></Footer>
         </div>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}>
+        </EditProfilePopup>
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onSaveCard={handleSaveCard}>
+        </AddPlacePopup>
+        <ImagePopup
+          card={selectedCard}
+          onClose={closeAllPopups}>
+        </ImagePopup>
+        <PopupWithForm
+          name='warning'
+          title='Вы уверены?'
+          isOpen={false}
+          onClose={closeAllPopups}>
+        </PopupWithForm>
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}>
+        </EditAvatarPopup>
       </div>
     </CurrentUserContext.Provider>
   );
